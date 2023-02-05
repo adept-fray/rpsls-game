@@ -1,0 +1,32 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html, body{
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    color: aliceblue;
+}
+
+
+.button{
+    display: inline-block;
+    text-decoration: none;
+    background-color: inherit;
+    color: inherit;
+    padding: 10px 12px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 3%;
+}
+.button:hover{
+    background-color: mediumseagreen;
+}
+.button:active{
+    background-color: seagreen;
+}
