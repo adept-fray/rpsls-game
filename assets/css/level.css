@@ -1,0 +1,66 @@
+#cloud, #snowman, #dove, #leaf{
+    position: absolute;
+    outline: 4px solid tomato;
+    border-radius: 50%;
+    background-color: #9fe0ca;
+}
+
+#cloud{
+    top: 67%;
+    right: -10%;
+    bottom: -10%;
+    left: 33%;
+}
+
+#snowman{
+    top: 50%;
+    right: 66%;
+    bottom: 18%;
+    left: -23%;
+}
+
+#dove{
+    top: 26%;
+    right: 43%;
+    bottom: 50%;
+    left: 14%;
+}
+
+#leaf{
+    top: -17%;
+    right: 40%;
+    bottom: 78%;
+    left: -17%;
+}
+
+
+/*  Meida queries   */
+@media screen and (orientation: landscape) {
+    #cloud{
+        top: 33%;
+        right: 67%;
+        bottom: -10%;
+        left: -10%;
+    }
+
+    #snowman{
+        top: -23%;
+        right: 50%;
+        bottom: 66%;
+        left: 18%;
+    }
+
+    #dove{
+        top: 14%;
+        right: 26%;
+        bottom: 43%;
+        left: 50%;
+    }
+    
+    #leaf{
+        top: -17%;
+        right: -17%;
+        bottom: 40%;
+        left: 78%;
+    }
+}
