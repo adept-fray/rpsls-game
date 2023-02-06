@@ -27,6 +27,15 @@ body{
     font-size: 1.5em;
 }
 
+/*  Background icon */
+#background-icon{
+    position: absolute;
+    top: 24%;
+    left: 26%;
+    font-size: 9em;
+    transform: translate(-50%, -50%);
+    color: #ffffff88;
+}
 
 /*  Button to change to next level  */
 #next-level{
