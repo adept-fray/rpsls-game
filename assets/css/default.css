@@ -35,3 +35,7 @@ html, body{
     filter: opacity(30%);
     cursor: not-allowed;
 }
+.button.disabled{
+    cursor: not-allowed;
+    pointer-events: none;
+}
