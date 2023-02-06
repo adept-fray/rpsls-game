@@ -127,3 +127,15 @@ body{
     right: 0%;
     text-align: right;
 }
+
+
+
+
+
+@media screen and (orientation: landscape) {
+    #backbutton{
+        left: 9%;
+        font-size: 1.5em;
+    }
+}
+  

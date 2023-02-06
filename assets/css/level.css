@@ -20,8 +20,26 @@
 }
 
 /*************************************/
+/*  home button */
+#homepage{
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 2em;
+}
+#homepage .button{
+    padding: 16px;
+}
+#homepage .button:hover{
+    background-color: #515050;
+    color: white;
+}
+#homepage .button:active{
+    background-color: #1d1d1d;
+    color: white;
+}
 
-
+/*  levels  */
 #cloud, #snowman, #dove, #leaf{
     position: absolute;
     outline: 6px solid #bdbdbd;
@@ -111,6 +129,10 @@
 
     /****************************/
 
+    #homepage{
+        right: 90%;
+        left: 0;
+    }
 
     #cloud{
         top: 33%;
