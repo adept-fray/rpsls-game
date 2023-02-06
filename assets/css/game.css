@@ -2,6 +2,32 @@ body{
     background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9));
 }
 
+/*  Nav buttons */
+#homepage{
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 1.5em;
+}
+#homepage .button, #backbutton .button{
+    padding: 16px;
+}
+#homepage .button:hover, #backbutton .button:hover{
+    background-color: #515050;
+    color: white;
+}
+#homepage .button:active, #backbutton .button:active{
+    background-color: #1d1d1d;
+    color: white;
+}
+#backbutton{
+    position: absolute;
+    top: 0;
+    left: 16%;
+    font-size: 1.5em;
+}
+
+
 /*  Button to change to next level  */
 #next-level{
     position: absolute;
