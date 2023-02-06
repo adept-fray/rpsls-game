@@ -1,9 +1,20 @@
+document.addEventListener('DOMContentLoaded', function(){
+    let levels = document.querySelectorAll('a[data-level');
+
+    openLevel(levels);
+
+    for (const level of levels) {
+        console.log(level.firstElementChild);
+        level.addEventListener('click', iconSet());
+    }
+});
+
+
 /**
  * to remove disbaled class and open the correct level(s)
+ * in level.html page
  */
-let levels = document.querySelectorAll('a[data-level');
-openLevel();
-function openLevel(){
+function openLevel(levels){
     switch(sessionStorage.openLevel){
         case 'leaf':
             levels[3].classList.remove('disabled');
@@ -18,14 +29,11 @@ function openLevel(){
     }
 }
 
+
 /**
  * set icon name for background icon
+ * used in game.html page
  */
-for (const level of levels) {
-    console.log(level.firstElementChild);
-    level.addEventListener('click', iconSet());
-}
-
 function iconSet(ev){
     ev.preventDefault();
     sessionStorage('iconName', this.firstElementChild.className)
