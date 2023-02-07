@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function contentLoaded(){
         sessionStorage.setItem('roundsLeft', sessionStorage.getItem('startRounds'));
         sessionStorage.setItem('win3', '');
         this.className = 'button disabled';
+        resetGameDeck()
     });
 });
 
@@ -197,9 +198,18 @@ function updateOpenLevel(){
  */
 function endGame(){
     let deck = document.getElementsByClassName('deck');
-        for (const hand of deck) {
-            hand.classList.add('disabled');
-        }
+    for (const hand of deck) {
+        hand.className = 'deck button disabled';
+    }
+}
+/**
+ * reset game round by enabling the deck buttons
+ */
+function resetGameDeck(){
+    let deck = document.getElementsByClassName('deck');
+    for (const hand of deck) {
+        hand.className = 'deck button';
+    }
 }
 
 /**
