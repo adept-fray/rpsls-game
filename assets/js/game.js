@@ -88,6 +88,14 @@ function cloudPick(playerHand){
     let retObj;
     if(playerHand == 'ROCK'){
         retObj = deckPick(rockDeck, rockText, result, cloudIf);
+    } else if(playerHand == 'PAPER'){
+        retObj = deckPick(paperDeck, paperText, result, cloudIf);
+    } else if(playerHand == 'SCISSORS'){
+        retObj = deckPick(scissorsDeck, scissorsText, result, cloudIf);
+    } else if(playerHand == 'LIZARD'){
+        retObj = deckPick(lizardDeck, lizardText, result, cloudIf);
+    } else if(playerHand == 'SPOCK'){
+        retObj = deckPick(spockDeck, spockText, result, cloudIf);
     }
     return retObj;
 }
