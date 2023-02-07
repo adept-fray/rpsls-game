@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
     let levels = document.querySelectorAll('a[data-level');
 
-    openLevel(levels);
+    openLevel();
 
     for (const level of levels) {
         console.log(level.firstElementChild);
@@ -18,7 +18,8 @@ document.addEventListener('DOMContentLoaded', function(){
  * to remove disbaled class and open the correct level(s)
  * in level.html page
  */
-function openLevel(levels){
+function openLevel(){
+    let levels = document.querySelectorAll('a[data-level');
     switch(sessionStorage.openLevel){
         case 'leaf':
             levels[3].classList.remove('disabled');

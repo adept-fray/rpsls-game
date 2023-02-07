@@ -74,7 +74,17 @@ function botPick(playerHand){
     console.log(difficulty);
     let retObj = {};
     if(difficulty == 'cloud'){
-        retObj = cloudPick(playerHand);
+        //console.log('inside cloudIf logic');
+        retObj = botPickHand(playerHand, cloudIf);
+    } else if(difficulty == 'snowman'){
+        //console.log('inside snowmanIf logic');
+        retObj = botPickHand(playerHand, snowmanIf);
+    } else if(difficulty == 'dove'){
+        //console.log('inside doveIf logic');
+        retObj = botPickHand(playerHand, doveIf);
+    } else if(difficulty == 'leaf'){
+        //console.log('inside leafIf logic');
+        retObj = botPickHand(playerHand, leafIf);
     }
     return retObj;
 }
@@ -84,18 +94,18 @@ function botPick(playerHand){
  * @param {*} playerHand 
  * @returns object
  */
-function cloudPick(playerHand){
+function botPickHand(playerHand, levelIf){
     let retObj;
     if(playerHand == 'ROCK'){
-        retObj = deckPick(rockDeck, rockText, result, cloudIf);
+        retObj = deckPick(rockDeck, rockText, result, levelIf);
     } else if(playerHand == 'PAPER'){
-        retObj = deckPick(paperDeck, paperText, result, cloudIf);
+        retObj = deckPick(paperDeck, paperText, result, levelIf);
     } else if(playerHand == 'SCISSORS'){
-        retObj = deckPick(scissorsDeck, scissorsText, result, cloudIf);
+        retObj = deckPick(scissorsDeck, scissorsText, result, levelIf);
     } else if(playerHand == 'LIZARD'){
-        retObj = deckPick(lizardDeck, lizardText, result, cloudIf);
+        retObj = deckPick(lizardDeck, lizardText, result, levelIf);
     } else if(playerHand == 'SPOCK'){
-        retObj = deckPick(spockDeck, spockText, result, cloudIf);
+        retObj = deckPick(spockDeck, spockText, result, levelIf);
     }
     return retObj;
 }
