@@ -17,6 +17,10 @@ document.addEventListener('DOMContentLoaded', function contentLoaded(){
 });
 
 
+/**
+ * plays one round after player has picked a hand
+ * @param {event object} ev 
+ */
 function playRound(ev){
     ev.preventDefault();
     console.log(this.textContent);
@@ -57,6 +61,11 @@ function playRound(ev){
     //  update rounds textcontent
 }
 
+/**
+ * choose the level difficulty logic same as the current level
+ * @param {*} playerHand 
+ * @returns object
+ */
 function botPick(playerHand){
     let difficulty = sessionStorage.difficultyName ? sessionStorage.difficultyName : 'cloud';
     console.log(difficulty);
@@ -66,8 +75,11 @@ function botPick(playerHand){
     }
     return retObj;
 }
+
 /**
- * game logic for level cloud
+ * logic to pick the deck same as player hand
+ * @param {*} playerHand 
+ * @returns object
  */
 function cloudPick(playerHand){
     let retObj;
@@ -77,8 +89,14 @@ function cloudPick(playerHand){
     return retObj;
 }
 
+
 /**
- * private function for 4 logic fucntions
+ * check the round result, bot hand and its corresponding text
+ * @param {deck of hands} deck 
+ * @param {text relative to hands} deckText 
+ * @param {result of the round} result 
+ * @param {array to use for if condition} ifValues 
+ * @returns object
  */
 function deckPick(deck, deckText, result, ifValues){
     let retObj = {};
@@ -128,7 +146,11 @@ let scissorsText = ['SCISSORS cuts PAPER', 'SCISSORS dicapitates LIZARD', 'SPOCK
 let spockText = ['SPOCK vaporizes ROCK', 'SPOCK smashes SCISSORS', 'PAPER disproves SPOCK', 'LIZARD poisons SPOCK', 'SPOCK'];
 
 
-
+/**
+ * increment or decrement wins and roundsLeft localy
+ * @param {local copy of sessionStorage} rounds 
+ * @param {result of the round} result 
+ */
 function inrementDecrementRounds(rounds, result){
     console.log(rounds)
     if(result == 'WIN'){
