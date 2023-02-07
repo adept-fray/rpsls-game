@@ -16,6 +16,18 @@ document.addEventListener('DOMContentLoaded', function contentLoaded(){
     }
     updateBackgroundIcon();
     resetUIElements();
+    let nextButton = document.getElementById('next_level');
+    nextButton.addEventListener('click', function(event){
+        event.preventDefault();
+        resetUIElements();
+        nextDifficultyName();
+        nextIconName();
+        updateBackgroundIcon();
+        sessionStorage.setItem('wins', sessionStorage.getItem('startWins'));
+        sessionStorage.setItem('roundsLeft', sessionStorage.getItem('startRounds'));
+        sessionStorage.setItem('win3', '');
+        this.className = 'button disabled';
+    });
 });
 
 
@@ -46,13 +58,7 @@ function playRound(ev){
     }
     if(rounds.wins == 3 && !sessionStorage.getItem('win3')){
         let nextButton = document.getElementById('next_level');
-        nextButton.classList.remove('disabled');
-        nextButton.addEventListener('click', function(){
-            resetUIElements();
-            nextDifficultyName();
-            nextIconName();
-            updateBackgroundIcon();
-        });
+        nextButton.className = 'button';
         updateOpenLevel();
         sessionStorage.setItem('win3', 'true');
         console.log(nextButton);
@@ -239,7 +245,9 @@ function updateUIElements(botDeck){
     totalWinsEl.textContent = 'Wins: ' + sessionStorage.getItem('wins');
 }
 
-
+/**
+ * setting the UI elements to their default values
+ */
 function resetUIElements(){
     let resultEl = document.getElementById('round_result');
     let resultTextEl = document.getElementById('round_result_text');
@@ -253,26 +261,38 @@ function resetUIElements(){
     totalWinsEl.textContent = 'Wins: ' + sessionStorage.getItem('startWins');
 }
 
+/**
+ * update the icon class for background
+ */
 function updateBackgroundIcon(){
     let backIcon = document.getElementById('background_icon');
     backIcon.firstElementChild.className = sessionStorage.getItem('iconName');
 }
 
+/**
+ * change to next level's difficulty on next_button click
+ */
 function nextDifficultyName(){
+    console.log('inside of nextDifficultyName');
     switch (sessionStorage.getItem('difficultyName')) {
         case 'dove':
             sessionStorage.setItem('difficultyName', 'leaf');
+            console.log('inside of nextDifficultyName: leaf');
             break;
         case 'snowman':
             sessionStorage.setItem('difficultyName', 'dove');
+            console.log('inside of nextDifficultyName: dove');
             break;
         case 'cloud':
             sessionStorage.setItem('difficultyName', 'snowman');
+            console.log('inside of nextDifficultyName: snowman');
             break;
     }
 }
 
-
+/**
+ * change to next level's icon on next_button click
+ */
 function nextIconName(){
     switch (sessionStorage.getItem('iconName')) {
         case 'fa-solid fa-dove':
