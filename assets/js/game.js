@@ -66,6 +66,31 @@ function playRound(ev){
             //  end game
             endGame();
             //  show modall form to get email
+            //  then clear modal content and change it to
+            //  ty & show email written
+            /**
+             * 
+             * 
+             * 
+             * 
+             * 
+             * 
+             * 
+             * 
+             * 
+             * 
+             * 
+             * 
+             * 
+             * 
+             * 
+             * 
+             * 
+             * 
+             * 
+             * 
+             * 
+             */
         }
     }
 
