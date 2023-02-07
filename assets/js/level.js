@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', function(){
-    sessionStorage.setItem('wins', '0');
-    sessionStorage.setItem('roundsLeft', '10');
+    sessionStorage.setItem('startRounds', '11');
+    sessionStorage.setItem('startWins', '0');
+    sessionStorage.setItem('wins', sessionStorage.getItem('startWins'));
+    sessionStorage.setItem('roundsLeft', sessionStorage.getItem('startRounds'));
 
     let levels = document.querySelectorAll('a[data-level');
 

@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function contentLoaded(){
         hand.addEventListener('click', playRound, false);
     }
     updateBackgroundIcon();
-    updateUIElements(null);
+    resetUIElements();
 });
 
 
@@ -47,6 +47,12 @@ function playRound(ev){
     if(rounds.wins == 3 && !sessionStorage.getItem('win3')){
         let nextButton = document.getElementById('next_level');
         nextButton.classList.remove('disabled');
+        nextButton.addEventListener('click', function(){
+            resetUIElements();
+            nextDifficultyName();
+            nextIconName();
+            updateBackgroundIcon();
+        });
         updateOpenLevel();
         sessionStorage.setItem('win3', 'true');
         console.log(nextButton);
@@ -227,20 +233,56 @@ function updateUIElements(botDeck){
     let roundsLeftEl = document.getElementById('rounds_left');
     let totalWinsEl = document.getElementById('total_wins');
 
-    if(botDeck){
-        resultEl.textContent = botDeck.result ? botDeck.result : '';
-        resultTextEl.textContent = botDeck.handText ? botDeck.handText : '';
-    } else {
-        resultEl.textContent = '';
-        resultTextEl.textContent = '';
-    }
-
+    resultEl.textContent = botDeck.result;
+    resultTextEl.textContent = botDeck.handText;
     roundsLeftEl.textContent = 'Rounds: ' + sessionStorage.getItem('roundsLeft');
     totalWinsEl.textContent = 'Wins: ' + sessionStorage.getItem('wins');
 }
 
 
+function resetUIElements(){
+    let resultEl = document.getElementById('round_result');
+    let resultTextEl = document.getElementById('round_result_text');
+    let roundsLeftEl = document.getElementById('rounds_left');
+    let totalWinsEl = document.getElementById('total_wins');
+
+
+    resultEl.textContent = '';
+    resultTextEl.textContent = '';
+    roundsLeftEl.textContent = 'Rounds: ' + sessionStorage.getItem('startRounds');
+    totalWinsEl.textContent = 'Wins: ' + sessionStorage.getItem('startWins');
+}
+
 function updateBackgroundIcon(){
     let backIcon = document.getElementById('background_icon');
     backIcon.firstElementChild.className = sessionStorage.getItem('iconName');
+}
+
+function nextDifficultyName(){
+    switch (sessionStorage.getItem('difficultyName')) {
+        case 'dove':
+            sessionStorage.setItem('difficultyName', 'leaf');
+            break;
+        case 'snowman':
+            sessionStorage.setItem('difficultyName', 'dove');
+            break;
+        case 'cloud':
+            sessionStorage.setItem('difficultyName', 'snowman');
+            break;
+    }
+}
+
+
+function nextIconName(){
+    switch (sessionStorage.getItem('iconName')) {
+        case 'fa-solid fa-dove':
+            sessionStorage.setItem('iconName', 'fa-solid fa-leaf');
+            break;
+        case 'fa-solid fa-snowman':
+            sessionStorage.setItem('iconName', 'fa-solid fa-dove');
+            break;
+        case 'fa-solid fa-cloud-rain':
+            sessionStorage.setItem('iconName', 'fa-solid fa-snowman');
+            break;
+    }
 }
