@@ -45,7 +45,7 @@ function playRound(ev){
         endGame();
     }
     if(rounds.wins == 3 && !sessionStorage.getItem('win3')){
-        let nextButton = document.getElementById('next-level');
+        let nextButton = document.getElementById('next_level');
         nextButton.classList.remove('disabled');
         updateOpenLevel();
         sessionStorage.setItem('win3', 'true');
@@ -205,7 +205,7 @@ function endGame(){
  */
 function updateUIElements(botDeck){
     let resultEl = document.getElementById('round_result');
-    let resultTextEl = document.getElementById('round_result-text');
+    let resultTextEl = document.getElementById('round_result_text');
     let roundsLeftEl = document.getElementById('rounds_left');
     let totalWinsEl = document.getElementById('total_wins');
 

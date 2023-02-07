@@ -38,7 +38,7 @@ body{
 }
 
 /*  Button to change to next level  */
-#next-level{
+#next_level{
     position: absolute;
     bottom: 87%;
     left: 52%;
@@ -46,7 +46,7 @@ body{
     text-align: center;
 }
 /*  Result of the round + text  */
-#round-result{
+#round_result{
     position: absolute;
     bottom: 63%;
     left: 10%;
@@ -55,7 +55,7 @@ body{
     padding: 10px 12px;
     text-align: center;
 }
-#round-result-text{
+#round_result_text{
     position: absolute;
     bottom: 56%;
     left: 10%;
@@ -122,7 +122,7 @@ body{
     left: 10%;
     right: 10%;
 }
-#rounds-left{
+#rounds_left{
     position: absolute;
     bottom: 0%;
     left: 0%;
