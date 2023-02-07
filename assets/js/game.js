@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function contentLoaded(){
         console.log(hand.textContent);
         hand.addEventListener('click', playRound, false);
     }
-
+    updateBackgroundIcon();
     updateUIElements(null);
 });
 
@@ -237,4 +237,10 @@ function updateUIElements(botDeck){
 
     roundsLeftEl.textContent = 'Rounds: ' + sessionStorage.getItem('roundsLeft');
     totalWinsEl.textContent = 'Wins: ' + sessionStorage.getItem('wins');
+}
+
+
+function updateBackgroundIcon(){
+    let backIcon = document.getElementById('background_icon');
+    backIcon.firstElementChild.className = sessionStorage.getItem('iconName');
 }
