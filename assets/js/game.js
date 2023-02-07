@@ -13,7 +13,7 @@
 //  next-button clicked. update difficulty to next level
 
 document.addEventListener('DOMContentLoaded', function contentLoaded(){
-    console.log(difficulty);
+    //console.log(difficulty);
 
     //  add eventlistener to player-deck to start a round
     let playerDeck = document.getElementsByClassName('deck');
@@ -23,13 +23,20 @@ document.addEventListener('DOMContentLoaded', function contentLoaded(){
     }
 });
 
+
 function playRound(ev){
     ev.preventDefault();
+    console.log(this.textContent);
     let playerHand = this.textContent;
-    let botHand = botPick();
+    let botdeck = botPick(playerHand);
+   /*
     console.log('playerHand: ' + playerHand);
-    console.log('botHand: ' + botHand);
+    console.log('botHand: ' + botdeck.hand);
+    console.log('botHand: ' + botdeck.handText);*/
 
+    /*if(botdeck.result == 'WIN'){
+        console.log(botdeck.handText);
+    }*/
     //  check rounds = 0
     //  round = 0 stop game
 
@@ -43,18 +50,72 @@ function playRound(ev){
     //  update rounds textcontent
 }
 
-function botPick(random){
-    /*
-    let random = ( Math.floor(Math.random() * 100) + 1 );
+function botPick(playerHand){
     let difficulty = sessionStorage.difficultyName ? sessionStorage.difficultyName : 'cloud';
+    console.log(difficulty);
+    let retObj = {};
     if(difficulty == 'cloud'){
-        cloudPick(random);
-    } else if(difficulty == 'snowman'){
-        snowmanPick(random);
-    } else if(difficulty == 'dove'){
-        dovePick(random);
-    } else if(difficulty == 'leaf'){
-        leafPick(random);
-    }*/
-    return 'PAPER';
+        retObj = cloudPick(playerHand);
+    }
+    return retObj;
 }
+/**
+ * game logic for level cloud
+ */
+function cloudPick(playerHand){
+    let retObj;
+    if(playerHand == 'ROCK'){
+        retObj = deckPick(rockDeck, rockText, result, cloudIf);
+    }
+    return retObj;
+}
+
+/**
+ * private function for 4 logic fucntions
+ */
+function deckPick(deck, deckText, result, ifValues){
+    let retObj = {};
+    let random = (Math.floor(Math.random() * 100) + 1);
+    for(let i = 0; i < 5; i++){
+        if(random <= ifValues[i]){
+            retObj.hand = deck[i];
+            retObj.result = result[i];
+            retObj.handText = deckText[i];
+            
+            //console.log('inside of deck pick');
+            //console.log(retObj);
+            return retObj;
+        }
+    }
+}
+
+/**
+ * result of round corresponding to bot decks
+ */
+let result = ['WIN', 'WIN', 'LOSE', 'LOSE', 'TIE'];
+
+/**
+ * if values to compare to random number
+ */
+let cloudIf = [30, 59, 88, 94, 100]; /*[20, 40, 60, 80, 100]; to make it more easy*/
+let snowmanIf = [25, 60, 75, 87, 100]; /*[15, 30, 53, 76, 100] */
+let doveIf = [20, 40, 60, 80, 100]; /*[11, 22, 48, 74, 100]*/
+let leafIf = [15, 30, 53, 76, 100]; /*[6, 12, 41, 70, 100]*/
+
+/**
+ * bot decks corresponding to result of round
+ */
+let rockDeck = ['SCISSORS', 'LIZARD', 'SPOCK', 'PAPER', 'ROCK'];
+let paperDeck = ['ROCK', 'SPOCK', 'SCISSORS', 'LIZARD', 'PAPER'];
+let lizardDeck = ['PAPER', 'SPOCK', 'ROCK', 'SCISSORS', 'LIZARD'];
+let scissorsDeck = ['PAPER', 'LIZARD', 'SPOCK', 'ROCK', 'SCISSORS'];
+let spockDeck = ['ROCK', 'SCISSORS', 'PAPER', 'LIZARD', 'SPOCK'];
+
+/**
+ * result text corresponding to bot decks
+ */
+let rockText = ['ROCK crushes SCISSORS', 'ROCK crushes LIZARD', 'SPOCK vaporizes ROCK', 'PAPER covers ROCK', 'ROCK'];
+let paperText = ['PAPER covers ROCK', 'PAPER disproves SPOCK', 'SCISSORS cuts PAPER', 'LIZARD eats PAPER', 'PAPER'];
+let lizardText = ['LIZARD eats PAPER', 'LIZARD poisons SPOCK', 'ROCK crushes LIZARD', 'SCISSORS dicapitates LIZARD', 'LIZARD'];
+let scissorsText = ['SCISSORS cuts PAPER', 'SCISSORS dicapitates LIZARD', 'SPOCK smashes SCISSORS', 'ROCK crushes SCISSORS', 'SCISSORS'];
+let spockText = ['SPOCK vaporizes ROCK', 'SPOCK smashes SCISSORS', 'PAPER disproves SPOCK', 'LIZARD poisons SPOCK', 'SPOCK'];
