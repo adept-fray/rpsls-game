@@ -53,7 +53,7 @@ function playRound(ev){
     inrementDecrementRounds(rounds, botDeck.result);
 
     if(rounds.roundsLeft <= 0){
-        // end game
+        // end game round
         endGame();
     }
     if(rounds.wins == 3 && !sessionStorage.getItem('win3')){
@@ -62,35 +62,12 @@ function playRound(ev){
         updateOpenLevel();
         sessionStorage.setItem('win3', 'true');
         console.log(nextButton);
+        //  end game screen
         if(sessionStorage.getItem('difficultyName') == 'leaf'){
             //  end game
             endGame();
-            //  show modall form to get email
-            //  then clear modal content and change it to
-            //  ty & show email written
-            /**
-             * 
-             * 
-             * 
-             * 
-             * 
-             * 
-             * 
-             * 
-             * 
-             * 
-             * 
-             * 
-             * 
-             * 
-             * 
-             * 
-             * 
-             * 
-             * 
-             * 
-             * 
-             */
+            let modal = document.getElementById('modal');
+            modal.className = '';
         }
     }
 
@@ -244,7 +221,7 @@ function updateOpenLevel(){
 }
 
 /**
- * end the game by disabling the deck buttons
+ * end the game round by disabling the deck buttons
  */
 function endGame(){
     let deck = document.getElementsByClassName('deck');
