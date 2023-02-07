@@ -1,8 +1,3 @@
-//  content dom load
-//  set/pick the difficulty function
-//  player click the player deck to pick one hand
-//  one round starts
-//  bot pick a hand randomly
 //  check player and bot hands for win lose tie
 //  update result match & text placeholders
 //  update rounds total-left & wins
@@ -13,8 +8,6 @@
 //  next-button clicked. update difficulty to next level
 
 document.addEventListener('DOMContentLoaded', function contentLoaded(){
-    //console.log(difficulty);
-
     //  add eventlistener to player-deck to start a round
     let playerDeck = document.getElementsByClassName('deck');
     for (const hand of playerDeck) {
@@ -29,14 +22,28 @@ function playRound(ev){
     console.log(this.textContent);
     let playerHand = this.textContent;
     let botdeck = botPick(playerHand);
-   /*
     console.log('playerHand: ' + playerHand);
     console.log('botHand: ' + botdeck.hand);
-    console.log('botHand: ' + botdeck.handText);*/
+    console.log('botHand: ' + botdeck.handText);
 
-    /*if(botdeck.result == 'WIN'){
-        console.log(botdeck.handText);
-    }*/
+    let rounds = {
+        wins: Number(sessionStorage.getItem('wins')),
+        roundsLeft: Number(sessionStorage.getItem('roundsLeft'))
+    };
+    console.log(rounds);
+    inrementDecrementRounds(rounds, botdeck.result);
+
+    if(rounds.roundsLeft <= 0){
+        // disbale buttons
+        let deck = document.getElementsByClassName('deck');
+        for (const hand of deck) {
+            console.log(hand);
+            hand.classList.add('disabled');
+        }
+    }
+
+    sessionStorage.setItem('wins', rounds.wins.toString());
+    sessionStorage.setItem('roundsLeft', rounds.roundsLeft.toString());
     //  check rounds = 0
     //  round = 0 stop game
 
@@ -119,3 +126,21 @@ let paperText = ['PAPER covers ROCK', 'PAPER disproves SPOCK', 'SCISSORS cuts PA
 let lizardText = ['LIZARD eats PAPER', 'LIZARD poisons SPOCK', 'ROCK crushes LIZARD', 'SCISSORS dicapitates LIZARD', 'LIZARD'];
 let scissorsText = ['SCISSORS cuts PAPER', 'SCISSORS dicapitates LIZARD', 'SPOCK smashes SCISSORS', 'ROCK crushes SCISSORS', 'SCISSORS'];
 let spockText = ['SPOCK vaporizes ROCK', 'SPOCK smashes SCISSORS', 'PAPER disproves SPOCK', 'LIZARD poisons SPOCK', 'SPOCK'];
+
+
+
+function inrementDecrementRounds(rounds, result){
+    console.log(rounds)
+    if(result == 'WIN'){
+        rounds.wins++;
+        rounds.roundsLeft = rounds.roundsLeft - 1;
+        console.log('inside increment decrement wins: ' + rounds.wins);
+        console.log('inside increment decrement rounds left: ' + rounds.roundsLeft);
+    } else if(result == 'LOSE'){
+        rounds.roundsLeft = rounds.roundsLeft - 1;
+        console.log('inside increment decrement rounds left: ' + rounds.roundsLeft);
+    } else if(result == 'TIE'){
+        rounds.roundsLeft = rounds.roundsLeft - 1;
+        console.log('inside increment decrement rounds left: ' + rounds.roundsLeft);
+    }
+}

@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', function(){
+    sessionStorage.setItem('wins', '0');
+    sessionStorage.setItem('roundsLeft', '10');
+
     let levels = document.querySelectorAll('a[data-level');
 
     openLevel(levels);
