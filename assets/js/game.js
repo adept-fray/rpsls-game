@@ -14,6 +14,8 @@ document.addEventListener('DOMContentLoaded', function contentLoaded(){
         console.log(hand.textContent);
         hand.addEventListener('click', playRound, false);
     }
+
+    updateUIElements(null);
 });
 
 
@@ -25,28 +27,29 @@ function playRound(ev){
     ev.preventDefault();
     console.log(this.textContent);
     let playerHand = this.textContent;
-    let botdeck = botPick(playerHand);
+    let botDeck = botPick(playerHand);
     console.log('playerHand: ' + playerHand);
-    console.log('botHand: ' + botdeck.hand);
-    console.log('botHand: ' + botdeck.handText);
+    console.log('botHand: ' + botDeck.hand);
+    console.log('botHand: ' + botDeck.handText);
 
     let rounds = {
         wins: Number(sessionStorage.getItem('wins')),
         roundsLeft: Number(sessionStorage.getItem('roundsLeft'))
     };
     console.log(rounds);
-    inrementDecrementRounds(rounds, botdeck.result);
+
+    inrementDecrementRounds(rounds, botDeck.result);
 
     if(rounds.roundsLeft <= 0){
         // end game
         endGame();
     }
     if(rounds.wins == 3 && !sessionStorage.getItem('win3')){
-        sessionStorage.setItem('win3', 'true');
         let nextButton = document.getElementById('next-level');
-        console.log(nextButton);
         nextButton.classList.remove('disabled');
-        updateDifficultyName();
+        updateOpenLevel();
+        sessionStorage.setItem('win3', 'true');
+        console.log(nextButton);
         if(sessionStorage.getItem('difficultyName') == 'leaf'){
             //  end game
             endGame();
@@ -54,19 +57,11 @@ function playRound(ev){
         }
     }
 
+    
     sessionStorage.setItem('wins', rounds.wins.toString());
     sessionStorage.setItem('roundsLeft', rounds.roundsLeft.toString());
-    //  check rounds = 0
-    //  round = 0 stop game
 
-    //  check wins = 3
-    //  update sessionStorage.openLevel & remove disbaled class from next-level button
-
-    //  check playerhand & bothand for
-    //  win tie lose
-
-    //  update result accordingly textcontent
-    //  update rounds textcontent
+    updateUIElements(botDeck);
 }
 
 /**
@@ -75,7 +70,7 @@ function playRound(ev){
  * @returns object
  */
 function botPick(playerHand){
-    let difficulty = sessionStorage.difficultyName ? sessionStorage.difficultyName : 'cloud';
+    let difficulty = sessionStorage.getItem('difficultyName') ? sessionStorage.getItem('difficultyName') : 'cloud';
     console.log(difficulty);
     let retObj = {};
     if(difficulty == 'cloud'){
@@ -179,16 +174,16 @@ function inrementDecrementRounds(rounds, result){
 /**
  * update the sessionStorag variable difficultyName to be the highest playable level
  */
-function updateDifficultyName(){
-    switch (sessionStorage.difficultyName) {
+function updateOpenLevel(){
+    switch (sessionStorage.getItem('difficultyName')) {
         case 'dove':
-            sessionStorage.difficultyName = 'leaf';
+            sessionStorage.setItem('openLevel', 'leaf');
             break;
         case 'snowman':
-            sessionStorage.difficultyName = 'dove';
+            sessionStorage.setItem('openLevel', 'dove');
             break;
         case 'cloud':
-            sessionStorage.difficultyName = 'snowman';
+            sessionStorage.setItem('openLevel', 'snowman');
             break;
     }
 }
@@ -202,4 +197,26 @@ function endGame(){
             console.log(hand);
             hand.classList.add('disabled');
         }
+}
+
+/**
+ * update UI elements on page load and every round
+ * @param {*} botDeck 
+ */
+function updateUIElements(botDeck){
+    let resultEl = document.getElementById('round_result');
+    let resultTextEl = document.getElementById('round_result-text');
+    let roundsLeftEl = document.getElementById('rounds_left');
+    let totalWinsEl = document.getElementById('total_wins');
+
+    if(botDeck){
+        resultEl.textContent = botDeck.result ? botDeck.result : '';
+        resultTextEl.textContent = botDeck.handText ? botDeck.handText : '';
+    } else {
+        resultEl.textContent = '';
+        resultTextEl.textContent = '';
+    }
+
+    roundsLeftEl.textContent = 'Rounds: ' + sessionStorage.getItem('roundsLeft');
+    totalWinsEl.textContent = 'Wins: ' + sessionStorage.getItem('wins');
 }
