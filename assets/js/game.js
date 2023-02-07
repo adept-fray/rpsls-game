@@ -38,11 +38,19 @@ function playRound(ev){
     inrementDecrementRounds(rounds, botdeck.result);
 
     if(rounds.roundsLeft <= 0){
-        // disbale buttons
-        let deck = document.getElementsByClassName('deck');
-        for (const hand of deck) {
-            console.log(hand);
-            hand.classList.add('disabled');
+        // end game
+        endGame();
+    }
+    if(rounds.wins == 3 && !sessionStorage.getItem('win3')){
+        sessionStorage.setItem('win3', 'true');
+        let nextButton = document.getElementById('next-level');
+        console.log(nextButton);
+        nextButton.classList.remove('disabled');
+        updateDifficultyName();
+        if(sessionStorage.getItem('difficultyName') == 'leaf'){
+            //  end game
+            endGame();
+            //  show modall form to get email
         }
     }
 
@@ -165,4 +173,33 @@ function inrementDecrementRounds(rounds, result){
         rounds.roundsLeft = rounds.roundsLeft - 1;
         console.log('inside increment decrement rounds left: ' + rounds.roundsLeft);
     }
+}
+
+
+/**
+ * update the sessionStorag variable difficultyName to be the highest playable level
+ */
+function updateDifficultyName(){
+    switch (sessionStorage.difficultyName) {
+        case 'dove':
+            sessionStorage.difficultyName = 'leaf';
+            break;
+        case 'snowman':
+            sessionStorage.difficultyName = 'dove';
+            break;
+        case 'cloud':
+            sessionStorage.difficultyName = 'snowman';
+            break;
+    }
+}
+
+/**
+ * end the game by disabling the deck buttons
+ */
+function endGame(){
+    let deck = document.getElementsByClassName('deck');
+        for (const hand of deck) {
+            console.log(hand);
+            hand.classList.add('disabled');
+        }
 }
