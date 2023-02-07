@@ -45,12 +45,6 @@
     outline: 6px solid #bdbdbd;
     border-radius: 50%;
     background-color: #a0a0a0;
-    /*
-    position: absolute;
-    outline: 4px solid tomato;
-    border-radius: 50%;
-    background-color: #9fe0ca;
-    */
 }
 
 #cloud{
@@ -82,7 +76,6 @@
 }
 
 #cloud i, #snowman i, #dove i, #leaf i{
-    /*center icon*/
     font-size: 3em;
     position: relative;
     top: 50%;
@@ -91,27 +84,23 @@
 }
 
 #cloud i{
-    /*center icon*/
     top: 36%;
     left: 44%;
     transform: translate(-50%);
 }
 #snowman i{
-    /*center icon*/
     top: 39%;
     left: 58%;
     transform: translate(-50%);
 }
 
 #dove i{
-    /*center icon*/
     top: 33%;
     left: 50%;
     transform: translate(-50%);
 }
 
 #leaf i{
-    /*center icon*/
     top: 52%;
     left: 57%;
     transform: translate(-50%);
@@ -163,7 +152,6 @@
     }
 
     #cloud i, #snowman i, #dove i, #leaf i{
-        /*center icon*/
         font-size: 4em;
         position: relative;
         top: 50%;
@@ -172,19 +160,16 @@
     }
 
     #cloud i{
-        /*center icon*/
         top: 36%;
         left: 55%;
     }
 
     #dove i{
-        /*center icon*/
         top: 33%;
         left: 50%;
     }
 
     #leaf i{
-        /*center icon*/
         top: 44%;
         left: 33%;
     }

@@ -1,17 +1,7 @@
-//  check player and bot hands for win lose tie
-//  update result match & text placeholders
-//  update rounds total-left & wins
-//  check if rounds-left = 0
-//  if yes then stop game
-//  check if wins = 3
-//  if yes open new level in session storage & remove disbaled class from next-button
-//  next-button clicked. update difficulty to next level
-
 document.addEventListener('DOMContentLoaded', function contentLoaded(){
     //  add eventlistener to player-deck to start a round
     let playerDeck = document.getElementsByClassName('deck');
     for (const hand of playerDeck) {
-        console.log(hand.textContent);
         hand.addEventListener('click', playRound, false);
     }
     updateBackgroundIcon();
@@ -37,18 +27,13 @@ document.addEventListener('DOMContentLoaded', function contentLoaded(){
  */
 function playRound(ev){
     ev.preventDefault();
-    console.log(this.textContent);
     let playerHand = this.textContent;
     let botDeck = botPick(playerHand);
-    console.log('playerHand: ' + playerHand);
-    console.log('botHand: ' + botDeck.hand);
-    console.log('botHand: ' + botDeck.handText);
 
     let rounds = {
         wins: Number(sessionStorage.getItem('wins')),
         roundsLeft: Number(sessionStorage.getItem('roundsLeft'))
     };
-    console.log(rounds);
 
     inrementDecrementRounds(rounds, botDeck.result);
 
@@ -61,7 +46,6 @@ function playRound(ev){
         nextButton.className = 'button';
         updateOpenLevel();
         sessionStorage.setItem('win3', 'true');
-        console.log(nextButton);
         //  end game screen
         if(sessionStorage.getItem('difficultyName') == 'leaf'){
             //  end game
@@ -85,19 +69,14 @@ function playRound(ev){
  */
 function botPick(playerHand){
     let difficulty = sessionStorage.getItem('difficultyName') ? sessionStorage.getItem('difficultyName') : 'cloud';
-    console.log(difficulty);
     let retObj = {};
     if(difficulty == 'cloud'){
-        //console.log('inside cloudIf logic');
         retObj = botPickHand(playerHand, cloudIf);
     } else if(difficulty == 'snowman'){
-        //console.log('inside snowmanIf logic');
         retObj = botPickHand(playerHand, snowmanIf);
     } else if(difficulty == 'dove'){
-        //console.log('inside doveIf logic');
         retObj = botPickHand(playerHand, doveIf);
     } else if(difficulty == 'leaf'){
-        //console.log('inside leafIf logic');
         retObj = botPickHand(playerHand, leafIf);
     }
     return retObj;
@@ -142,8 +121,6 @@ function deckPick(deck, deckText, result, ifValues){
             retObj.result = result[i];
             retObj.handText = deckText[i];
             
-            //console.log('inside of deck pick');
-            //console.log(retObj);
             return retObj;
         }
     }
@@ -187,18 +164,13 @@ let spockText = ['SPOCK vaporizes ROCK', 'SPOCK smashes SCISSORS', 'PAPER dispro
  * @param {result of the round} result 
  */
 function inrementDecrementRounds(rounds, result){
-    console.log(rounds)
     if(result == 'WIN'){
         rounds.wins++;
         rounds.roundsLeft = rounds.roundsLeft - 1;
-        console.log('inside increment decrement wins: ' + rounds.wins);
-        console.log('inside increment decrement rounds left: ' + rounds.roundsLeft);
     } else if(result == 'LOSE'){
         rounds.roundsLeft = rounds.roundsLeft - 1;
-        console.log('inside increment decrement rounds left: ' + rounds.roundsLeft);
     } else if(result == 'TIE'){
         rounds.roundsLeft = rounds.roundsLeft - 1;
-        console.log('inside increment decrement rounds left: ' + rounds.roundsLeft);
     }
 }
 
@@ -226,7 +198,6 @@ function updateOpenLevel(){
 function endGame(){
     let deck = document.getElementsByClassName('deck');
         for (const hand of deck) {
-            console.log(hand);
             hand.classList.add('disabled');
         }
 }
@@ -275,19 +246,15 @@ function updateBackgroundIcon(){
  * change to next level's difficulty on next_button click
  */
 function nextDifficultyName(){
-    console.log('inside of nextDifficultyName');
     switch (sessionStorage.getItem('difficultyName')) {
         case 'dove':
             sessionStorage.setItem('difficultyName', 'leaf');
-            console.log('inside of nextDifficultyName: leaf');
             break;
         case 'snowman':
             sessionStorage.setItem('difficultyName', 'dove');
-            console.log('inside of nextDifficultyName: dove');
             break;
         case 'cloud':
             sessionStorage.setItem('difficultyName', 'snowman');
-            console.log('inside of nextDifficultyName: snowman');
             break;
     }
 }

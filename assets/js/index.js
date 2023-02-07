@@ -2,7 +2,6 @@
 let rightTextCover = document.getElementById('right');
 let menuItems = document.getElementsByClassName('menu-item');
 for (const tab of menuItems) {
-    console.log(tab);
     tab.addEventListener('click', activeContent);
 }
 

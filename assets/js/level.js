@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', function(){
     openLevel();
 
     for (const level of levels) {
-        console.log(level.firstElementChild);
         level.addEventListener('click', iconSet, false);
         level.addEventListener('click', difficultySet, false);
     }
@@ -42,7 +41,6 @@ function openLevel(){
  * used in game.html page
  */
 function iconSet(ev){
-    //ev.preventDefault();
     sessionStorage.setItem('iconName', this.firstElementChild.className)
 }
 
@@ -50,6 +48,5 @@ function iconSet(ev){
  * on click update the level difficulty to the clicked level
  */
 function difficultySet(ev){
-    //ev.preventDefault();
     sessionStorage.setItem('difficultyName', this.id);
 }
